@@ -1,0 +1,13 @@
+prefix=c:/STUDY/PROGRAMS/PORTFOLIO/.conda/Library
+exec_prefix=c:/STUDY/PROGRAMS/PORTFOLIO/.conda/Library
+libdir=c:/STUDY/PROGRAMS/PORTFOLIO/.conda/Library/lib
+sharedlibdir=c:/STUDY/PROGRAMS/PORTFOLIO/.conda/Library/lib
+includedir=c:/STUDY/PROGRAMS/PORTFOLIO/.conda/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.3.1
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
