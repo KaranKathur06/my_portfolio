@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  basePath: '/my_portfolio',
   images: {
-    domains: ['avatars.githubusercontent.com', 'raw.githubusercontent.com', 'opengraph.githubassets.com'],
-    formats: ['image/avif', 'image/webp'],
+    unoptimized: true,
   },
   reactStrictMode: true,
   swcMinify: true,
