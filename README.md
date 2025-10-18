@@ -302,6 +302,4 @@ Contributions, issues, and feature requests are welcome!
 
 ---
 
-**Made with ❤️ and Python by Karan Kathur**
-
 If you found this helpful, please give it a ⭐️!
