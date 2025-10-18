@@ -31,23 +31,18 @@ const Contact = () => {
     setStatus("loading");
 
     try {
-      // Send to API endpoint
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        
-        setTimeout(() => {
-          setStatus("idle");
-        }, 5000);
-      } else {
+      // For static site deployment, open email client
+      const mailtoLink = `mailto:kathurkaran077@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      window.location.href = mailtoLink;
+      
+      setStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      
+      setTimeout(() => {
+        setStatus("idle");
+      }, 5000);
+      
+      if (false) {
         setStatus("error");
         setTimeout(() => {
           setStatus("idle");
