@@ -15,17 +15,12 @@ export interface GitHubRepo {
 }
 
 const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "KaranKathur06";
-const GITHUB_TOKEN = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
 
 export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
   try {
     const headers: HeadersInit = {
       Accept: "application/vnd.github.v3+json",
     };
-
-    if (GITHUB_TOKEN) {
-      headers.Authorization = `token ${GITHUB_TOKEN}`;
-    }
 
     const response = await fetch(
       `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
