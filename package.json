@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "predev": "node scripts/copy-resume.cjs",
+    "prebuild": "node scripts/copy-resume.cjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

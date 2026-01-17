@@ -1,15 +1,15 @@
 "use client";
 
-import { Github, Linkedin, Twitter, Mail, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Heart } from "lucide-react";
+import { profile } from "@/data/portfolio";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: Github, href: "https://github.com/KaranKathur06", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/karankathur", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/karankathur", label: "Twitter" },
-    { icon: Mail, href: "mailto:contact@karankathur.dev", label: "Email" },
+    { icon: Github, href: profile.links.github, label: "GitHub" },
+    { icon: Linkedin, href: profile.links.linkedin, label: "LinkedIn" },
+    { icon: Mail, href: `mailto:${profile.email}`, label: "Email" },
   ];
 
   const footerLinks = [
@@ -17,6 +17,9 @@ const Footer = () => {
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
     { name: "Projects", href: "#projects" },
+    { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#experience" },
+    { name: "Certifications", href: "#certifications" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -32,6 +35,15 @@ const Footer = () => {
             <p className="text-slate-400 mb-4">
               Full-stack Web & App Designer + Developer crafting powerful digital experiences.
             </p>
+            <div className="text-sm text-slate-500 space-y-1">
+              <div>{profile.location}</div>
+              <a
+                href={`mailto:${profile.email}`}
+                className="inline-block hover:text-primary-400 transition-colors"
+              >
+                {profile.email}
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}

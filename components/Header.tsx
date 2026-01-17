@@ -7,12 +7,37 @@ import Link from "next/link";
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("#home");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      const sectionIds = [
+        "#home",
+        "#about",
+        "#services",
+        "#projects",
+        "#skills",
+        "#experience",
+        "#certifications",
+        "#contact",
+      ];
+
+      const viewportMid = window.scrollY + window.innerHeight * 0.35;
+      let current = "#home";
+
+      for (const id of sectionIds) {
+        const el = document.querySelector(id) as HTMLElement | null;
+        if (!el) continue;
+        const top = el.offsetTop;
+        if (top <= viewportMid) current = id;
+      }
+
+      setActiveSection(current);
     };
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -22,6 +47,8 @@ const Header = () => {
     { name: "Services", href: "#services" },
     { name: "Projects", href: "#projects" },
     { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#experience" },
+    { name: "Certifications", href: "#certifications" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -29,7 +56,7 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-slate-950/90 backdrop-blur-lg shadow-lg shadow-primary-500/10"
+          ? "bg-slate-950/85 backdrop-blur-xl border-b border-slate-900 shadow-lg shadow-primary-500/10"
           : "bg-transparent"
       }`}
     >
@@ -45,10 +72,17 @@ const Header = () => {
             <li key={link.name}>
               <a
                 href={link.href}
-                className="text-slate-300 hover:text-primary-400 transition-colors duration-200 relative group"
+                aria-current={activeSection === link.href ? "page" : undefined}
+                className={`text-slate-300 hover:text-primary-300 transition-colors duration-200 relative group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 rounded-sm ${
+                  activeSection === link.href ? "text-slate-100" : ""
+                }`}
               >
                 {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full" />
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-primary-400 transition-all duration-300 ${
+                    activeSection === link.href ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
               </a>
             </li>
           ))}
@@ -57,9 +91,9 @@ const Header = () => {
         {/* CTA Button */}
         <a
           href="#contact"
-          className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/50 transition-all duration-300 hover:scale-105"
+          className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/40 transition-all duration-300 hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
         >
-          Hire Me
+          Let's Work Together
         </a>
 
         {/* Mobile Menu Button */}
@@ -81,7 +115,9 @@ const Header = () => {
                 <a
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-slate-300 hover:text-primary-400 transition-colors text-lg"
+                  className={`block text-slate-300 hover:text-primary-300 transition-colors text-lg ${
+                    activeSection === link.href ? "text-slate-100" : ""
+                  }`}
                 >
                   {link.name}
                 </a>
@@ -91,9 +127,9 @@ const Header = () => {
               <a
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-center px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/50 transition-all duration-300"
+                className="block text-center px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/40 transition-all duration-300"
               >
-                Hire Me
+                Let's Work Together
               </a>
             </li>
           </ul>

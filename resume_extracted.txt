@@ -1,0 +1,89 @@
+Karan Kathur
+Full-Stack Developer — Python Engineer — Web & Mobile Applications
+India — kathurkaran077@gmail.com — +91-63524-54180
+Portfolio — GitHub — LinkedIn
+Professional Summary
+Full-Stack Developer with strong expertise in Python-based backend systems and modern frontend
+technologies. Experienced in building scalable web and mobile applications, REST APIs, analytics
+dashboards, and secure authentication systems. Freelancing full-time since July 2025, delivering end-
+to-end solutions with a focus on clean architecture, performance, and user-centric design.
+Technical Skills
+Backend: Python, Django, Flask, FastAPI, RESTful APIs, Node.js
+Frontend: React, Next.js, JavaScript, TypeScript, Tailwind CSS, HTML5, CSS3
+Mobile: Flutter, React Native, Dart
+Databases: PostgreSQL, MySQL, MongoDB, SQLite, Firebase
+Data & Analytics: Pandas, NumPy, Matplotlib, Tableau, Power BI
+Tools & Platforms: Git, GitHub, Docker, Figma, VS Code, Linux
+Other: UI/UX Design, Responsive Design, Web Security, Agile & Scrum
+Professional Experience
+Freelance Full-Stack Developer July 2025 – Present
+Self-Employed
+•Deliver end-to-end web and mobile applications for clients, from requirement analysis to deployment.
+•Architect and develop full-stack systems using Python (Django, Flask, FastAPI) and modern frontend
+frameworks.
+•Build REST APIs, authentication systems, dashboards, and database-driven applications.
+•Design responsive, user-focused interfaces using Tailwind CSS, Bootstrap, and Figma.
+•Manage complete project lifecycle including planning, development, optimization, and maintenance.
+•Portfolio and live projects available at karankathur06.github.io/my portfolio.
+Python Developer Intern Feb 2025 – July 2025
+BellatrixNC
+•Led development of EcoCarpool , a Django-based sustainable ride-sharing platform.
+•Developed RESTful APIs for frontend and mobile application integrations.
+•Built real-time analytics dashboards using Chart.js.
+•Integrated secure authentication, authorization, and payment workflows.
+•Optimized database queries, improving performance by approximately 40%.
+•Worked in an Agile environment and maintained technical documentation.
+
+Projects
+EcoCarpool Platform 2025
+Python, Django, PostgreSQL, JavaScript, Bootstrap
+•Developed a full-featured ride-sharing platform focused on sustainable transportation.
+•Implemented ride booking, secure payments, eco-impact tracking, and admin analytics dashboard.
+Smart Short Link Platform 2025
+Python, Django, REST APIs, JavaScript, PostgreSQL
+•Built a URL shortening and analytics platform with authentication and dashboard insights.
+•Implemented link tracking, CPM logic, earnings analytics, and role-based access control.
+Real-Time Analytics Dashboard 2024
+Python, Flask, Pandas, Chart.js, PostgreSQL
+•Designed a real-time data analytics dashboard for business performance monitoring.
+•Visualized KPIs using interactive charts and automated data pipelines.
+Authentication & User Management System 2024
+Python, Django, JWT, PostgreSQL
+•Designed secure authentication and authorization workflows using JWT-based access control.
+•Implemented email verification, role-based permissions, and session management.
+T20 Cricket Analysis Dashboard 2023
+Python, Pandas, Matplotlib, Tableau, Power BI
+•Analyzed and visualized player and match performance statistics across multiple datasets.
+•Built interactive dashboards with comparative and predictive insights.
+Criminal Investigation System 2024
+Flutter, Firebase
+•Developed a mobile application for managing criminal records and investigations.
+•Implemented Firebase authentication, advanced search, filters, and role-based access control.
+Ghost VA (Virtual Assistant) Aug 2022
+Python, Speech Recognition, NLP, APIs
+•Built a voice-enabled virtual assistant supporting multi-user workflows.
+•Implemented task management, web search, automation, and text-to-speech features.
+Portfolio & Client Websites 2023 – 2025
+React, Next.js, Tailwind CSS, JavaScript
+•Designed and developed multiple responsive portfolio and business websites.
+•Focused on performance optimization, SEO fundamentals, and modern UI/UX practices.
+
+Education
+B.Tech in Information Technology 2021 – 2025
+Atmiya University, Rajkot — CGPA: 8.2 / 10
+Higher Secondary (Science – PCM) 2021
+Modi School, Rajkot — Percentage: 83%
+Certifications
+•Hackathon Participation Certificate
+•Python Development Certification
+•Data Science with Python
+•Machine Learning Fundamentals
+•AI ChatGPT Bootcamp
+•Git & GitHub Bootcamp
+•Excel Bootcamp
+•C / C++ Development Certification
+•HTML & CSS Design Thinking
+•Social Media Marketing Internship
+Additional Information
+Languages: English (Professional), Hindi (Native), Gujarati (Native)
+Soft Skills: Problem Solving, Critical Thinking, Time Management, Leadership

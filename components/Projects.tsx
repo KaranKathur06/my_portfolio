@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { ExternalLink, Github, Star, GitFork, Sparkles } from "lucide-react";
 import { fetchGitHubRepos, GitHubRepo } from "@/lib/github";
+import { profile, projects as resumeProjects } from "@/data/portfolio";
 
 const Projects = () => {
   const { ref, inView } = useInView({
@@ -13,6 +14,7 @@ const Projects = () => {
 
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     const loadRepos = async () => {
@@ -37,6 +39,9 @@ const Projects = () => {
     };
     return colors[language || ""] || "bg-slate-400";
   };
+
+  const featured = resumeProjects.filter((p) => p.featured);
+  const visibleResumeProjects = showAll ? resumeProjects : featured;
 
   return (
     <section id="projects" className="section-padding bg-slate-900/30">
@@ -65,7 +70,7 @@ const Projects = () => {
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            A selection of my recent work from GitHub. Each project showcases different technologies and problem-solving approaches.
+            Featured work from my resume (plus open-source projects from GitHub).
           </p>
 
           <div
@@ -73,6 +78,75 @@ const Projects = () => {
               inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
             }`}
           />
+        </div>
+
+        <div className="mb-14">
+          <div className="flex items-center justify-between gap-4 flex-wrap mb-6">
+            <h3 className="text-2xl font-semibold text-slate-100">Featured Projects</h3>
+            <button
+              type="button"
+              onClick={() => setShowAll((v) => !v)}
+              className="px-5 py-2.5 rounded-full border-2 border-primary-500 text-slate-100 font-semibold hover:bg-primary-500/10 transition-all duration-300"
+            >
+              {showAll ? "Show Featured" : "View All Projects"}
+            </button>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {visibleResumeProjects.map((project, index) => (
+              <div
+                key={`${project.name}-${project.year}`}
+                className={`group p-6 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-primary-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10 ${
+                  inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${index * 80 + 250}ms` }}
+              >
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <div>
+                    <h4 className="text-xl font-semibold text-slate-200 group-hover:text-primary-300 transition-colors">
+                      {project.name}
+                    </h4>
+                    <div className="text-sm text-slate-500 mt-1">{project.year}</div>
+                  </div>
+                  <div className="px-2.5 py-1 rounded-full text-xs bg-primary-500/10 border border-primary-500/20 text-primary-300">
+                    Resume
+                  </div>
+                </div>
+
+                <div className="space-y-2 mb-5">
+                  {project.bullets.slice(0, 2).map((b) => (
+                    <p key={b} className="text-sm text-slate-400 leading-relaxed">
+                      {b}
+                    </p>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 text-xs bg-slate-950/40 text-slate-300 rounded-full border border-slate-800"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 flex-wrap mb-8">
+          <h3 className="text-2xl font-semibold text-slate-100">Open Source on GitHub</h3>
+          <a
+            href={profile.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-slate-300 hover:text-primary-300 transition-colors"
+          >
+            <span>View GitHub Profile</span>
+            <ExternalLink size={18} />
+          </a>
         </div>
 
         {/* Loading State */}
@@ -94,6 +168,15 @@ const Projects = () => {
         {/* Projects Grid */}
         {!loading && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {repos.length === 0 && (
+              <div className="md:col-span-2 lg:col-span-3 p-8 bg-slate-900/40 border border-slate-800 rounded-2xl text-center">
+                <div className="text-slate-200 font-semibold mb-2">GitHub projects are temporarily unavailable</div>
+                <div className="text-slate-400 text-sm">
+                  You can still view my open-source work directly on GitHub.
+                </div>
+              </div>
+            )}
+
             {repos.map((repo, index) => (
               <div
                 key={repo.id}
@@ -178,24 +261,6 @@ const Projects = () => {
             ))}
           </div>
         )}
-
-        {/* View More */}
-        <div
-          className={`mt-12 text-center transition-all duration-700 delay-1000 ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <a
-            href={`https://github.com/${process.env.NEXT_PUBLIC_GITHUB_USERNAME || "KaranKathur06"}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center space-x-2 px-8 py-4 border-2 border-primary-500 rounded-full font-semibold text-lg hover:bg-primary-500/10 transition-all duration-300 hover:scale-105"
-          >
-            <Github size={20} />
-            <span>View All Projects on GitHub</span>
-            <ExternalLink size={18} />
-          </a>
-        </div>
       </div>
     </section>
   );

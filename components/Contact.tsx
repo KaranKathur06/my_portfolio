@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Twitter, Sparkles, CheckCircle, AlertCircle } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Github, Linkedin, Sparkles, CheckCircle, AlertCircle, Download } from "lucide-react";
+import { profile } from "@/data/portfolio";
 
 const Contact = () => {
   const { ref, inView } = useInView({
@@ -32,7 +33,7 @@ const Contact = () => {
 
     try {
       // For static site deployment, open email client
-      const mailtoLink = `mailto:kathurkaran077@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      const mailtoLink = `mailto:${profile.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
       window.location.href = mailtoLink;
       
       setStatus("success");
@@ -61,28 +62,29 @@ const Contact = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "kathurkaran077@gmail.com",
-      href: "mailto:kathurkaran077@gmail.com",
+      value: profile.email,
+      href: `mailto:${profile.email}`,
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+91 6352 454 180",
-      href: "tel:+916352454180",
+      value: profile.phone.replace(/-/g, " "),
+      href: `tel:${profile.phone.replace(/-/g, "")}`,
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "India",
+      value: profile.location,
       href: null,
     },
   ];
 
   const socialLinks = [
-    { icon: Github, href: "https://github.com/KaranKathur06", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/karan-kathur", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com/karankathur", label: "Twitter" },
+    { icon: Github, href: profile.links.github, label: "GitHub" },
+    { icon: Linkedin, href: profile.links.linkedin, label: "LinkedIn" },
   ];
+
+  const resumeHref = `${process.env.NEXT_PUBLIC_BASE_PATH || "/my_portfolio"}/KARAN_KATHUR_RESUME.pdf`;
 
   return (
     <section id="contact" className="section-padding bg-slate-900/30">
@@ -154,6 +156,36 @@ const Contact = () => {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div>
+              <h3 className="text-2xl font-semibold mb-6 text-slate-200">Quick Actions</h3>
+              <div className="grid grid-cols-1 gap-3">
+                <a
+                  href={profile.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full px-5 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-slate-200 hover:border-primary-500/50 transition-all duration-300"
+                >
+                  Connect on LinkedIn
+                </a>
+                <a
+                  href={profile.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full px-5 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-slate-200 hover:border-primary-500/50 transition-all duration-300"
+                >
+                  View GitHub Profile
+                </a>
+                <a
+                  href={resumeHref}
+                  className="w-full px-5 py-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl font-semibold text-slate-950 flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300"
+                >
+                  <Download size={18} />
+                  <span>Download Resume</span>
+                </a>
               </div>
             </div>
 

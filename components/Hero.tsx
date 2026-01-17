@@ -2,16 +2,17 @@
 
 import { useEffect, useState } from "react";
 import { ArrowRight, Code2, Sparkles } from "lucide-react";
+import { profile } from "@/data/portfolio";
 
 const Hero = () => {
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const roles = [
     "Full-Stack Developer",
-    "Web Designer",
-    "App Developer",
-    "UI/UX Designer",
-    "Python Expert",
+    "Python Engineer",
+    "Web & Mobile Developer",
+    "Backend (Django / FastAPI)",
+    "Frontend (React / Next.js)",
   ];
 
   useEffect(() => {
@@ -104,6 +105,22 @@ const Hero = () => {
             </a>
           </div>
 
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
+            {[
+              { label: "Experience", value: "~1 year" },
+              { label: "Freelancing", value: "Since July 2025" },
+              { label: "Location", value: profile.location },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="p-5 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-primary-500/30 transition-colors"
+              >
+                <div className="text-lg font-semibold text-slate-100">{item.value}</div>
+                <div className="text-sm text-slate-400 mt-1">{item.label}</div>
+              </div>
+            ))}
+          </div>
+
           {/* Stats - Hidden */}
           {/* Uncomment below to show stats
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 animate-fade-in">
@@ -129,9 +146,9 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-70">
         <div className="w-6 h-10 border-2 border-primary-400 rounded-full flex justify-center">
-          <div className="w-1.5 h-3 bg-primary-400 rounded-full mt-2 animate-pulse" />
+          <div className="w-1.5 h-3 bg-primary-400 rounded-full mt-2" />
         </div>
       </div>
     </section>
