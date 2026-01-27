@@ -43,6 +43,20 @@ const Projects = () => {
   const featured = resumeProjects.filter((p) => p.featured);
   const visibleResumeProjects = showAll ? resumeProjects : featured;
 
+  const repoLiveOverrides: Record<string, string> = {
+    "million-flats": "https://millionflats.com",
+    "metal-hub": "https://karankathur06.github.io/Metal-Hub/",
+    "smart-short": "https://www.smartshort.in",
+  };
+
+  const getRepoLiveUrl = (repo: GitHubRepo) => {
+    const normalized = repo.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+    return repo.homepage || repoLiveOverrides[normalized] || null;
+  };
+
   return (
     <section id="projects" className="section-padding bg-slate-900/30">
       <div className="container-custom" ref={ref}>
@@ -200,9 +214,9 @@ const Projects = () => {
                     >
                       <Github size={20} />
                     </a>
-                    {repo.homepage && (
+                    {getRepoLiveUrl(repo) && (
                       <a
-                        href={repo.homepage}
+                        href={getRepoLiveUrl(repo) as string}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-slate-400 hover:text-primary-400 transition-colors"
