@@ -97,7 +97,7 @@ const Contact = () => {
             }`}
           >
             <Sparkles size={16} className="text-primary-400" />
-            <span className="text-sm text-primary-300">Let's Connect</span>
+            <span className="text-sm text-primary-300">Let&apos;s Connect</span>
           </div>
 
           <h2
@@ -113,7 +113,7 @@ const Contact = () => {
               inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            Have a project in mind? Let's discuss how I can help bring your ideas to life
+            Have a project in mind? Let&apos;s discuss how I can help bring your ideas to life
           </p>
 
           <div
@@ -212,7 +212,7 @@ const Contact = () => {
             <div className="p-6 bg-gradient-to-br from-primary-500/10 to-accent-500/10 border border-primary-500/20 rounded-xl">
               <h4 className="text-xl font-semibold mb-2 text-slate-200">Ready to Start?</h4>
               <p className="text-slate-400 mb-4">
-                I'm currently available for freelance work and new project opportunities.
+                I&apos;m currently available for freelance work and new project opportunities.
               </p>
               <div className="flex items-center space-x-2 text-primary-400">
                 <div className="w-2 h-2 bg-primary-400 rounded-full animate-pulse" />
@@ -305,7 +305,7 @@ const Contact = () => {
               {status === "success" && (
                 <div className="flex items-center space-x-2 p-4 bg-green-500/10 border border-green-500/30 rounded-xl text-green-400">
                   <CheckCircle size={20} />
-                  <span>Message sent successfully! I'll get back to you soon.</span>
+                  <span>Message sent successfully! I&apos;ll get back to you soon.</span>
                 </div>
               )}
 

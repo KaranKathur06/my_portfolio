@@ -93,7 +93,7 @@ const Header = () => {
           href="#contact"
           className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/40 transition-all duration-300 hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
         >
-          Let's Work Together
+          Let&apos;s Work Together
         </a>
 
         {/* Mobile Menu Button */}
@@ -129,7 +129,7 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block text-center px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/40 transition-all duration-300"
               >
-                Let's Work Together
+                Let&apos;s Work Together
               </a>
             </li>
           </ul>

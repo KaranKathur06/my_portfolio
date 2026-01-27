@@ -61,7 +61,7 @@ const About = () => {
             {/* Introduction */}
             <div className="space-y-4">
               <p className="text-xl md:text-2xl text-slate-200 leading-relaxed font-medium">
-                Hey, I'm <span className="text-gradient font-bold">Karan Kathur</span> — a full-stack{" "}
+                Hey, I&apos;m <span className="text-gradient font-bold">Karan Kathur</span> — a full-stack{" "}
                 <span className="text-primary-400 font-semibold">Web & App Designer + Developer</span>{" "}
                 who builds powerful, elegant digital experiences.
               </p>
@@ -79,7 +79,7 @@ const About = () => {
               </p>
 
               <p className="text-lg text-slate-300 leading-relaxed">
-                Whether it's designing a modern interface, developing a full web platform, or building cross-platform apps, I handle the{" "}
+                Whether it&apos;s designing a modern interface, developing a full web platform, or building cross-platform apps, I handle the{" "}
                 <span className="text-accent-400 font-semibold">complete process</span> — design, development, optimization, and deployment.
               </p>
             </div>
@@ -109,7 +109,7 @@ const About = () => {
             {/* Technologies */}
             <div className="p-5 bg-gradient-to-br from-primary-500/5 to-accent-500/5 rounded-2xl border border-primary-500/10">
               <p className="text-sm text-slate-300 leading-relaxed mb-2.5">
-                I've worked across technologies like:
+                I&apos;ve worked across technologies like:
               </p>
               <div className="flex flex-wrap gap-1.5">
                 {["Flask", "Django", "FastAPI", "React", "Next.js", "Flutter", "Firebase", "REST APIs"].map((tech) => (
@@ -187,8 +187,8 @@ const About = () => {
               </h3>
               
               <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-                I'm currently open for <span className="text-primary-400 font-semibold">freelance and contract opportunities</span>.
-                Let's collaborate and create something amazing together!
+                I&apos;m currently open for <span className="text-primary-400 font-semibold">freelance and contract opportunities</span>.
+                Let&apos;s collaborate and create something amazing together!
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -196,7 +196,7 @@ const About = () => {
                   href="#contact"
                   className="group px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-primary-500/50 transition-all duration-300 hover:scale-105 flex items-center space-x-2"
                 >
-                  <span>Let's Build Something Exceptional</span>
+                  <span>Let&apos;s Build Something Exceptional</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>
                 </a>
                 <a

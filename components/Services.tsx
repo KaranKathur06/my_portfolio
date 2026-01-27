@@ -154,7 +154,7 @@ const Services = () => {
           }`}
         >
           <p className="text-xl text-slate-300 mb-6">
-            Need something specific? Let's discuss your project requirements
+            Need something specific? Let&apos;s discuss your project requirements
           </p>
           <a
             href="#contact"

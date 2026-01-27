@@ -61,7 +61,7 @@ const Hero = () => {
 
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-slide-up">
-            Hi, I'm{" "}
+            Hi, I&apos;m{" "}
             <span className="text-gradient glow-text">Karan Kathur</span>
           </h1>
 
