@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { Mail, MapPin, Phone, Send, Github, Linkedin, Sparkles, CheckCircle, AlertCircle, Download } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Github, Linkedin, Sparkles, CheckCircle, AlertCircle, Download, ChevronDown, Check } from "lucide-react";
 import { profile } from "@/data/portfolio";
 
 const Contact = () => {
@@ -19,6 +19,49 @@ const Contact = () => {
   });
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const subjectOptions = useMemo(
+    () => [
+      { value: "Web Development", label: "💻 Web Development Project" },
+      { value: "Mobile App Development", label: "📱 Mobile App Development" },
+      { value: "UI/UX Design", label: "🎨 UI/UX Design Services" },
+      { value: "Full-Stack Development", label: "⚡ Full-Stack Development" },
+      { value: "Backend Development", label: "🔧 Backend Development" },
+      { value: "Consultation", label: "💡 Technical Consultation" },
+      { value: "Maintenance & Support", label: "🛠️ Maintenance & Support" },
+      { value: "General Inquiry", label: "📧 General Inquiry" },
+      { value: "Other", label: "🔖 Other" },
+    ],
+    []
+  );
+
+  const [subjectOpen, setSubjectOpen] = useState(false);
+  const [subjectActiveIndex, setSubjectActiveIndex] = useState(0);
+  const subjectWrapRef = useRef<HTMLDivElement | null>(null);
+  const subjectButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  const selectedSubject = subjectOptions.find((o) => o.value === formData.subject) || null;
+
+  useEffect(() => {
+    if (!subjectOpen) return;
+    const onMouseDown = (e: MouseEvent) => {
+      const el = subjectWrapRef.current;
+      if (!el) return;
+      if (e.target instanceof Node && !el.contains(e.target)) setSubjectOpen(false);
+    };
+
+    window.addEventListener("mousedown", onMouseDown);
+    return () => window.removeEventListener("mousedown", onMouseDown);
+  }, [subjectOpen]);
+
+  useEffect(() => {
+    if (!subjectOpen) return;
+    const idx = Math.max(
+      0,
+      subjectOptions.findIndex((o) => o.value === formData.subject)
+    );
+    setSubjectActiveIndex(idx === -1 ? 0 : idx);
+  }, [formData.subject, subjectOpen, subjectOptions]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -92,7 +135,7 @@ const Contact = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <div
-            className={`inline-flex items-center space-x-2 px-4 py-2 bg-primary-500/10 border border-primary-500/30 rounded-full mb-6 transition-all duration-700 ${
+            className={`inline-flex items-center space-x-2 px-4 py-2 surface rounded-full mb-6 transition-all duration-700 ${
               inView ? "opacity-100 scale-100" : "opacity-0 scale-90"
             }`}
           >
@@ -117,7 +160,7 @@ const Contact = () => {
           </p>
 
           <div
-            className={`w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto mt-6 transition-all duration-700 delay-300 ${
+            className={`w-20 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 mx-auto mt-6 transition-all duration-700 delay-300 ${
               inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
             }`}
           />
@@ -136,7 +179,7 @@ const Contact = () => {
                 {contactInfo.map((info, index) => (
                   <div
                     key={index}
-                    className="flex items-start space-x-4 p-4 bg-slate-900/50 border border-slate-800 rounded-xl hover:border-primary-500/50 transition-all duration-300"
+                    className="flex items-start space-x-4 p-4 rounded-xl surface surface-hover"
                   >
                     <div className="w-12 h-12 bg-primary-500/10 rounded-lg flex items-center justify-center flex-shrink-0">
                       <info.icon className="text-primary-400" size={20} />
@@ -167,7 +210,7 @@ const Contact = () => {
                   href={profile.links.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full px-5 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-slate-200 hover:border-primary-500/50 transition-all duration-300"
+                  className="w-full px-5 py-3 rounded-xl surface surface-hover text-slate-200"
                 >
                   Connect on LinkedIn
                 </a>
@@ -175,13 +218,13 @@ const Contact = () => {
                   href={profile.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full px-5 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-slate-200 hover:border-primary-500/50 transition-all duration-300"
+                  className="w-full px-5 py-3 rounded-xl surface surface-hover text-slate-200"
                 >
                   View GitHub Profile
                 </a>
                 <a
                   href={resumeHref}
-                  className="w-full px-5 py-3 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl font-semibold text-slate-950 flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300"
+                  className="w-full px-5 py-3 bg-primary-500 rounded-xl font-semibold text-slate-950 flex items-center justify-center gap-2 hover:bg-primary-400 hover:shadow-xl hover:shadow-primary-500/30 transition-all duration-300"
                 >
                   <Download size={18} />
                   <span>Download Resume</span>
@@ -200,7 +243,7 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-14 h-14 rounded-xl bg-slate-900/50 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-primary-400 hover:border-primary-500/50 transition-all duration-300 hover:scale-110"
+                    className="w-14 h-14 rounded-xl surface surface-hover flex items-center justify-center text-slate-400 hover:text-primary-300 transition-all duration-300 hover:scale-105"
                   >
                     <social.icon size={24} />
                   </a>
@@ -209,7 +252,7 @@ const Contact = () => {
             </div>
 
             {/* CTA Box */}
-            <div className="p-6 bg-gradient-to-br from-primary-500/10 to-accent-500/10 border border-primary-500/20 rounded-xl">
+            <div className="p-6 rounded-xl surface">
               <h4 className="text-xl font-semibold mb-2 text-slate-200">Ready to Start?</h4>
               <p className="text-slate-400 mb-4">
                 I&apos;m currently available for freelance work and new project opportunities.
@@ -239,8 +282,8 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 transition-colors"
-                  placeholder="John Doe"
+                  className="w-full px-4 py-3 rounded-xl surface text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 transition-colors"
+                  placeholder="Your name"
                 />
               </div>
 
@@ -255,8 +298,8 @@ const Contact = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 transition-colors"
-                  placeholder="john@example.com"
+                  className="w-full px-4 py-3 rounded-xl surface text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 transition-colors"
+                  placeholder="you@example.com"
                 />
               </div>
 
@@ -264,25 +307,165 @@ const Contact = () => {
                 <label htmlFor="subject" className="block text-sm font-medium text-slate-300 mb-2">
                   Subject *
                 </label>
-                <select
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-slate-200 focus:outline-none focus:border-primary-500 transition-colors cursor-pointer"
-                >
-                  <option value="" disabled>Select a subject</option>
-                  <option value="Web Development">💻 Web Development Project</option>
-                  <option value="Mobile App Development">📱 Mobile App Development</option>
-                  <option value="UI/UX Design">🎨 UI/UX Design Services</option>
-                  <option value="Full-Stack Development">⚡ Full-Stack Development</option>
-                  <option value="Backend Development">🔧 Backend Development</option>
-                  <option value="Consultation">💡 Technical Consultation</option>
-                  <option value="Maintenance & Support">🛠️ Maintenance & Support</option>
-                  <option value="General Inquiry">📧 General Inquiry</option>
-                  <option value="Other">🔖 Other</option>
-                </select>
+                <div ref={subjectWrapRef} className="relative">
+                  <select
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    className="sr-only"
+                  >
+                    <option value="" disabled>
+                      Select a subject
+                    </option>
+                    {subjectOptions.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+
+                  <button
+                    ref={subjectButtonRef}
+                    type="button"
+                    aria-haspopup="listbox"
+                    aria-expanded={subjectOpen}
+                    className={`w-full px-4 py-3 rounded-xl border text-left flex items-center justify-between gap-3 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/25 ${
+                      subjectOpen
+                        ? "bg-[#0b1220]/80 border-primary-500/25 shadow-2xl shadow-black/40"
+                        : "bg-[#0b1220]/60 border-white/10"
+                    }`}
+                    onClick={() => setSubjectOpen((v) => !v)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        setSubjectOpen(false);
+                        return;
+                      }
+
+                      if (e.key === "ArrowDown") {
+                        e.preventDefault();
+                        setSubjectOpen(true);
+                        setSubjectActiveIndex((i) => Math.min(subjectOptions.length - 1, i + 1));
+                        return;
+                      }
+
+                      if (e.key === "ArrowUp") {
+                        e.preventDefault();
+                        setSubjectOpen(true);
+                        setSubjectActiveIndex((i) => Math.max(0, i - 1));
+                        return;
+                      }
+
+                      if (e.key === "Enter" || e.key === " ") {
+                        if (!subjectOpen) return;
+                        e.preventDefault();
+                        const o = subjectOptions[subjectActiveIndex];
+                        setFormData((p) => ({ ...p, subject: o.value }));
+                        setSubjectOpen(false);
+                        return;
+                      }
+                    }}
+                  >
+                    <span className="min-w-0">
+                      {selectedSubject ? (
+                        <span className="inline-flex items-center gap-3 min-w-0">
+                          <span className="w-6 text-center text-base leading-none">{selectedSubject.label.split(" ")[0]}</span>
+                          <span className="text-slate-200 font-medium truncate">
+                            {selectedSubject.label.split(" ").slice(1).join(" ")}
+                          </span>
+                        </span>
+                      ) : (
+                        <span className="text-slate-400 font-medium">Select a subject</span>
+                      )}
+                    </span>
+                    <ChevronDown
+                      size={18}
+                      className={`text-slate-400 transition-transform duration-200 ${
+                        subjectOpen ? "rotate-180" : "rotate-0"
+                      }`}
+                    />
+                  </button>
+
+                  <div
+                    role="listbox"
+                    aria-label="Subject"
+                    tabIndex={-1}
+                    className={`absolute z-30 mt-2 w-full rounded-xl border border-white/10 bg-[#0b1220]/95 backdrop-blur-md overflow-hidden transition-all duration-200 origin-top ${
+                      subjectOpen
+                        ? "opacity-100 scale-100 translate-y-0"
+                        : "pointer-events-none opacity-0 scale-[0.98] -translate-y-1"
+                    }`}
+                    onKeyDown={(e) => {
+                      if (e.key === "Escape") {
+                        e.preventDefault();
+                        setSubjectOpen(false);
+                        subjectButtonRef.current?.focus();
+                        return;
+                      }
+
+                      if (e.key === "ArrowDown") {
+                        e.preventDefault();
+                        setSubjectActiveIndex((i) => Math.min(subjectOptions.length - 1, i + 1));
+                        return;
+                      }
+
+                      if (e.key === "ArrowUp") {
+                        e.preventDefault();
+                        setSubjectActiveIndex((i) => Math.max(0, i - 1));
+                        return;
+                      }
+
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        const o = subjectOptions[subjectActiveIndex];
+                        setFormData((p) => ({ ...p, subject: o.value }));
+                        setSubjectOpen(false);
+                        subjectButtonRef.current?.focus();
+                      }
+                    }}
+                  >
+                    {subjectOptions.map((o, idx) => {
+                      const isSelected = formData.subject === o.value;
+                      const isActive = idx === subjectActiveIndex;
+                      const icon = o.label.split(" ")[0];
+                      const text = o.label.split(" ").slice(1).join(" ");
+
+                      return (
+                        <button
+                          key={o.value}
+                          type="button"
+                          role="option"
+                          aria-selected={isSelected}
+                          className={`w-full px-4 py-3 text-left flex items-center justify-between gap-3 transition-colors ${
+                            isActive
+                              ? "bg-primary-500/10"
+                              : "bg-transparent"
+                          } hover:bg-primary-500/10`}
+                          onMouseEnter={() => setSubjectActiveIndex(idx)}
+                          onClick={() => {
+                            setFormData((p) => ({ ...p, subject: o.value }));
+                            setSubjectOpen(false);
+                            subjectButtonRef.current?.focus();
+                          }}
+                        >
+                          <span className="inline-flex items-center gap-3 min-w-0">
+                            <span className="w-6 text-center text-base leading-none">{icon}</span>
+                            <span className="text-slate-200 font-medium truncate">{text}</span>
+                          </span>
+
+                          {isSelected ? (
+                            <span className="flex items-center gap-2 text-primary-300">
+                              <Check size={16} />
+                            </span>
+                          ) : (
+                            <span className="w-4" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
 
               <div>
@@ -296,7 +479,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="w-full px-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-xl surface text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 transition-colors resize-none"
                   placeholder="Tell me about your project..."
                 />
               </div>
@@ -319,7 +502,7 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="w-full px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl font-semibold text-lg hover:shadow-2xl hover:shadow-primary-500/50 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                className="w-full px-8 py-4 bg-primary-500 rounded-xl font-semibold text-lg text-slate-950 hover:bg-primary-400 hover:shadow-2xl hover:shadow-primary-500/40 transition-all duration-300 hover:scale-[1.01] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
               >
                 {status === "loading" ? (
                   <>

@@ -57,13 +57,19 @@ const Projects = () => {
     return repo.homepage || repoLiveOverrides[normalized] || null;
   };
 
+  const getProjectCodeUrl = (projectName: string, explicitCodeUrl?: string) => {
+    if (explicitCodeUrl) return explicitCodeUrl;
+    const q = encodeURIComponent(projectName);
+    return `${profile.links.github}?tab=repositories&q=${q}`;
+  };
+
   return (
     <section id="projects" className="section-padding bg-slate-900/30">
       <div className="container-custom" ref={ref}>
         {/* Section Header */}
         <div className="text-center mb-16">
           <div
-            className={`inline-flex items-center space-x-2 px-4 py-2 bg-primary-500/10 border border-primary-500/30 rounded-full mb-6 transition-all duration-700 ${
+            className={`inline-flex items-center space-x-2 px-4 py-2 surface rounded-full mb-6 transition-all duration-700 ${
               inView ? "opacity-100 scale-100" : "opacity-0 scale-90"
             }`}
           >
@@ -88,7 +94,7 @@ const Projects = () => {
           </p>
 
           <div
-            className={`w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto mt-6 transition-all duration-700 delay-300 ${
+            className={`w-20 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 mx-auto mt-6 transition-all duration-700 delay-300 ${
               inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
             }`}
           />
@@ -100,7 +106,7 @@ const Projects = () => {
             <button
               type="button"
               onClick={() => setShowAll((v) => !v)}
-              className="px-5 py-2.5 rounded-full border-2 border-primary-500 text-slate-100 font-semibold hover:bg-primary-500/10 transition-all duration-300"
+              className="px-5 py-2.5 rounded-full surface surface-hover text-slate-100 font-semibold"
             >
               {showAll ? "Show Featured" : "View All Projects"}
             </button>
@@ -110,7 +116,7 @@ const Projects = () => {
             {visibleResumeProjects.map((project, index) => (
               <div
                 key={`${project.name}-${project.year}`}
-                className={`group p-6 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-primary-500/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/10 ${
+                className={`group p-6 rounded-2xl surface surface-hover transition-transform duration-300 hover:scale-[1.01] ${
                   inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${index * 80 + 250}ms` }}
@@ -122,8 +128,27 @@ const Projects = () => {
                     </h4>
                     <div className="text-sm text-slate-500 mt-1">{project.year}</div>
                   </div>
-                  <div className="px-2.5 py-1 rounded-full text-xs bg-primary-500/10 border border-primary-500/20 text-primary-300">
-                    Resume
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={getProjectCodeUrl(project.name, project.links?.code)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-400 hover:text-primary-300 transition-colors"
+                      aria-label="View on GitHub"
+                    >
+                      <Github size={18} />
+                    </a>
+                    {project.links?.live && (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-400 hover:text-primary-300 transition-colors"
+                        aria-label="View live demo"
+                      >
+                        <ExternalLink size={18} />
+                      </a>
+                    )}
                   </div>
                 </div>
 
@@ -139,7 +164,7 @@ const Projects = () => {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2.5 py-1 text-xs bg-slate-950/40 text-slate-300 rounded-full border border-slate-800"
+                      className="px-2.5 py-1 text-xs bg-white/[0.03] text-slate-200 rounded-full border border-white/[0.06]"
                     >
                       {t}
                     </span>
@@ -169,7 +194,7 @@ const Projects = () => {
             {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="p-6 bg-slate-900/50 border border-slate-800 rounded-2xl animate-pulse"
+                className="p-6 rounded-2xl surface animate-pulse"
               >
                 <div className="h-6 bg-slate-800 rounded w-3/4 mb-4" />
                 <div className="h-4 bg-slate-800 rounded w-full mb-2" />
@@ -183,7 +208,7 @@ const Projects = () => {
         {!loading && (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {repos.length === 0 && (
-              <div className="md:col-span-2 lg:col-span-3 p-8 bg-slate-900/40 border border-slate-800 rounded-2xl text-center">
+              <div className="md:col-span-2 lg:col-span-3 p-8 rounded-2xl surface text-center">
                 <div className="text-slate-200 font-semibold mb-2">GitHub projects are temporarily unavailable</div>
                 <div className="text-slate-400 text-sm">
                   You can still view my open-source work directly on GitHub.
@@ -194,14 +219,14 @@ const Projects = () => {
             {repos.map((repo, index) => (
               <div
                 key={repo.id}
-                className={`group p-6 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-primary-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/10 ${
+                className={`group p-6 rounded-2xl surface surface-hover transition-transform duration-300 hover:scale-[1.01] ${
                   inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${index * 100 + 400}ms` }}
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary-500/14 to-primary-500/0 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
                     <Github className="text-primary-400" size={24} />
                   </div>
                   <div className="flex items-center space-x-3">
@@ -253,7 +278,7 @@ const Projects = () => {
                 )}
 
                 {/* Footer */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+                <div className="flex items-center justify-between pt-4 border-t border-white/10">
                   <div className="flex items-center space-x-4 text-sm text-slate-400">
                     {repo.language && (
                       <div className="flex items-center space-x-1">

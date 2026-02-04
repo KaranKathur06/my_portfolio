@@ -40,7 +40,7 @@ const Certifications = () => {
           </p>
 
           <div
-            className={`w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto mt-6 transition-all duration-700 delay-300 ${
+            className={`w-20 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 mx-auto mt-6 transition-all duration-700 delay-300 ${
               inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
             }`}
           />
@@ -50,13 +50,13 @@ const Certifications = () => {
           {certifications.map((title, index) => (
             <div
               key={title}
-              className={`group p-6 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-primary-500/40 transition-all duration-500 ${
+              className={`group p-6 rounded-2xl surface surface-hover transition-all duration-500 ${
                 inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: `${index * 60 + 350}ms` }}
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-br from-primary-500/18 to-primary-500/0 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Award className="text-primary-400" size={22} />
                 </div>
                 <div>

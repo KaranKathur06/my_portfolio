@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useInView } from "react-intersection-observer";
-import { Code, Palette, Rocket, Zap } from "lucide-react";
+import { profile, skillGroups } from "@/data/portfolio";
 
 const About = () => {
   const { ref, inView } = useInView({
@@ -9,28 +10,16 @@ const About = () => {
     threshold: 0.1,
   });
 
-  const highlights = [
-    {
-      icon: Code,
-      title: "Python-Powered",
-      description: "Backend systems, automation, data integration, and AI-powered applications",
-    },
-    {
-      icon: Palette,
-      title: "Design-First",
-      description: "Clean UI/UX with modern frameworks like React, Next.js, and TailwindCSS",
-    },
-    {
-      icon: Rocket,
-      title: "Full-Stack",
-      description: "End-to-end development from design to deployment and optimization",
-    },
-    {
-      icon: Zap,
-      title: "Performance",
-      description: "Maintainable, secure, and high-performance code that scales",
-    },
-  ];
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/my_portfolio";
+  const profileImageSrc = `${basePath}/profile.jpeg`;
+
+  const toolsTier = skillGroups.find((g) => g.title === "Tools & Platforms")?.tiers as
+    | Record<string, string[]>
+    | undefined;
+  const tools = toolsTier?.Core || [];
+  const toolsStrong = toolsTier?.Strong || [];
+
+  const verifiedTools = ["Git", "GitHub", "VS Code", "Docker", "Postman"];
 
   return (
     <section id="about" className="section-padding bg-slate-900/30">
@@ -44,7 +33,7 @@ const About = () => {
             About <span className="text-gradient">Me</span>
           </h2>
           <div
-            className={`w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto transition-all duration-700 delay-100 ${
+            className={`w-20 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 mx-auto transition-all duration-700 delay-100 ${
               inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
             }`}
           />
@@ -59,79 +48,95 @@ const About = () => {
             }`}
           >
             {/* Introduction */}
-            <div className="space-y-4">
-              <p className="text-xl md:text-2xl text-slate-200 leading-relaxed font-medium">
-                Hey, I&apos;m <span className="text-gradient font-bold">Karan Kathur</span> — a full-stack{" "}
-                <span className="text-primary-400 font-semibold">Web & App Designer + Developer</span>{" "}
-                who builds powerful, elegant digital experiences.
-              </p>
+            <div className="rounded-3xl surface overflow-hidden">
+              <div className="grid sm:grid-cols-[176px_1fr] gap-6 p-6">
+                <div className="relative">
+                  <div className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 bg-black/40 hover:shadow-2xl hover:shadow-black/40 transition-shadow duration-300">
+                    <Image
+                      src={profileImageSrc}
+                      alt={profile.name}
+                      fill
+                      sizes="176px"
+                      className="object-cover saturate-110 contrast-110 brightness-95 transition-transform duration-300 hover:scale-[1.01]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                  </div>
+                </div>
 
-              <p className="text-lg text-slate-300 leading-relaxed">
-                I specialize in using{" "}
-                <span className="inline-flex items-center px-3 py-1 bg-primary-500/10 border border-primary-500/30 rounded-full text-primary-400 font-semibold">
-                  🐍 Python
-                </span>{" "}
-                for backend systems, automation, data integration, and AI-powered web applications — combining it with modern frontend frameworks like{" "}
-                <span className="text-primary-400 font-semibold">React</span>,{" "}
-                <span className="text-primary-400 font-semibold">Next.js</span>, and{" "}
-                <span className="text-primary-400 font-semibold">TailwindCSS</span>{" "}
-                to deliver clean, fast, and scalable solutions.
-              </p>
+                <div className="space-y-4">
+                  <div>
+                    <div className="text-sm text-slate-400">{profile.location}</div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-slate-100 mt-1">
+                      {profile.name}
+                    </h3>
+                    <div className="text-slate-300 font-semibold mt-2">{profile.headline}</div>
+                  </div>
 
-              <p className="text-lg text-slate-300 leading-relaxed">
-                Whether it&apos;s designing a modern interface, developing a full web platform, or building cross-platform apps, I handle the{" "}
-                <span className="text-accent-400 font-semibold">complete process</span> — design, development, optimization, and deployment.
-              </p>
+                  <div className="space-y-3">
+                    <p className="text-slate-200 leading-relaxed">
+                      I&apos;m Karan Kathur, a full-stack developer focused on building clean, reliable, and production-ready web and mobile applications.
+                    </p>
+                    <p className="text-slate-300 leading-relaxed">
+                      I work across backend and frontend systems - using Python for APIs, automation, and data-driven logic, paired with modern frontend frameworks like React and Next.js for fast, accessible interfaces.
+                    </p>
+                    <p className="text-slate-300 leading-relaxed">
+                      I care deeply about clarity, performance, and maintainable code. My goal is to ship solutions that scale well, remain easy to maintain, and solve real problems without unnecessary complexity.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    <span className="px-3 py-1 text-xs rounded-full border border-white/10 bg-white/[0.03] text-slate-200">
+                      Freelancing: July 2025 – Present
+                    </span>
+                    <a
+                      href={`mailto:${profile.email}`}
+                      className="px-3 py-1 text-xs rounded-full border border-white/10 bg-white/[0.03] text-slate-200 hover:border-primary-500/30 hover:text-primary-200 transition-colors"
+                    >
+                      {profile.email}
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Workflow Section */}
-            <div className="flex-grow flex flex-col">
-              <h3 className="text-2xl font-bold mb-4 text-slate-100">
-                <span className="text-gradient">My Workflow</span>
-              </h3>
-              <div className="space-y-3 flex-grow">
-                {[
-                  { icon: "🎯", title: "Understand deeply", desc: "Every project starts with strategy and user needs" },
-                  { icon: "🎨", title: "Design intelligently", desc: "Focused on clean UI/UX and smooth experiences" },
-                  { icon: "⚡", title: "Develop efficiently", desc: "Writing maintainable, secure, and high-performance code" },
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start space-x-4 p-3.5 bg-slate-800/30 rounded-xl border border-slate-800 hover:border-primary-500/30 transition-all duration-300">
-                    <span className="text-2xl flex-shrink-0">{item.icon}</span>
-                    <div>
-                      <h4 className="text-base font-semibold text-primary-400 mb-1">{item.title}</h4>
-                      <p className="text-slate-400 text-xs leading-relaxed">{item.desc}</p>
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div className="p-6 rounded-2xl surface surface-hover">
+                <div className="text-sm font-semibold text-slate-200">Core Expertise</div>
+                <div className="mt-3 space-y-2 text-sm text-slate-300">
+                  {[
+                    "Full-Stack Development",
+                    "Backend APIs & Systems",
+                    "Authentication & Authorization",
+                    "Dashboards & Analytics",
+                    "Database-Driven Applications",
+                  ].map((x) => (
+                    <div key={x} className="flex gap-3">
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-primary-400 flex-shrink-0" />
+                      <span className="leading-relaxed">{x}</span>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Technologies */}
-            <div className="p-5 bg-gradient-to-br from-primary-500/5 to-accent-500/5 rounded-2xl border border-primary-500/10">
-              <p className="text-sm text-slate-300 leading-relaxed mb-2.5">
-                I&apos;ve worked across technologies like:
-              </p>
-              <div className="flex flex-wrap gap-1.5">
-                {["Flask", "Django", "FastAPI", "React", "Next.js", "Flutter", "Firebase", "REST APIs"].map((tech) => (
-                  <span key={tech} className="px-2.5 py-1 bg-slate-800/50 border border-slate-700 rounded-lg text-xs text-slate-300 hover:border-primary-500/50 hover:text-primary-400 transition-all duration-300">
-                    {tech}
-                  </span>
-                ))}
+              <div className="p-6 rounded-2xl surface surface-hover">
+                <div className="text-sm font-semibold text-slate-200">Tools & Software</div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {verifiedTools.map((t) => (
+                    <span
+                      key={t}
+                      className="inline-flex items-center gap-2 px-3 py-1 text-xs rounded-full border border-white/10 bg-white/[0.03] text-slate-200 hover:border-primary-500/30 transition-colors"
+                      title={t}
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary-400/80" />
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <div className="sr-only">
+                  {tools.length + toolsStrong.length}
+                </div>
               </div>
-              <p className="text-xs text-slate-400 mt-3 leading-relaxed">
-                Crafting everything from dashboards to automation tools and full-scale SaaS platforms.
-              </p>
-            </div>
-
-            {/* Final Statement */}
-            <div className="p-5 bg-gradient-to-r from-primary-500/10 to-accent-500/10 rounded-2xl border-l-4 border-primary-500">
-              <p className="text-sm text-slate-200 leading-relaxed">
-                When you collaborate with me, you get more than a coder — you get a{" "}
-                <span className="text-accent-400 font-bold">problem solver</span> who understands both{" "}
-                <span className="text-primary-400 font-semibold">technology</span> and{" "}
-                <span className="text-primary-400 font-semibold">design</span>, capable of turning ideas into{" "}
-                <span className="text-gradient font-bold">production-ready, high-impact digital products</span>.
-              </p>
             </div>
           </div>
 
@@ -141,26 +146,101 @@ const About = () => {
               inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
             }`}
           >
-            {highlights.map((item, index) => (
-              <div
-                key={index}
-                className="relative p-5 bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700 rounded-2xl hover:border-primary-500/50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary-500/10 group overflow-hidden flex flex-col aspect-square"
-              >
-                {/* Animated background gradient */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary-500/0 to-accent-500/0 group-hover:from-primary-500/5 group-hover:to-accent-500/5 transition-all duration-500" />
-                
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-xl flex items-center justify-center mb-3 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 flex-shrink-0">
-                    <item.icon className="text-primary-400 group-hover:text-primary-300" size={24} />
+            {/* Technical Skills */}
+            <div className="p-6 rounded-2xl surface surface-hover">
+              <div className="text-sm font-semibold text-slate-200">Technical Skills</div>
+              <div className="mt-4 space-y-4">
+                {([
+                  {
+                    tier: "Core",
+                    items: ["Python", "Django", "React", "JavaScript"],
+                  },
+                  {
+                    tier: "Strong",
+                    items: ["Next.js", "Tailwind CSS", "Flask"],
+                  },
+                  {
+                    tier: "Familiar",
+                    items: ["FastAPI"],
+                  },
+                ] as const).map((group) => (
+                  <div key={group.tier}>
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs font-semibold text-slate-300">{group.tier}</div>
+                      <div className="text-xs px-2 py-0.5 rounded-full border border-white/10 bg-white/[0.03] text-slate-300">
+                        {group.items.length}
+                      </div>
+                    </div>
+                    <div className="mt-2 grid grid-cols-2 gap-2">
+                      {group.items.map((x) => (
+                        <div
+                          key={x}
+                          className="px-3 py-2 rounded-xl border border-white/10 bg-black/30 text-sm text-slate-200"
+                        >
+                          {x}
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                  <h4 className="text-lg font-bold mb-2 text-slate-100 group-hover:text-gradient transition-all duration-300">{item.title}</h4>
-                  <p className="text-slate-400 text-xs leading-relaxed group-hover:text-slate-300 transition-colors flex-grow">{item.description}</p>
-                  
-                  {/* Decorative corner */}
-                  <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary-500/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Tech Stack */}
+            <div className="p-6 rounded-2xl surface surface-hover">
+              <div className="text-sm font-semibold text-slate-200">Tech Stack</div>
+              <div className="mt-4 space-y-4">
+                {[
+                  { k: "Backend", v: ["Python", "Django", "Flask", "FastAPI"] },
+                  { k: "Frontend", v: ["React", "Next.js", "JavaScript", "Tailwind CSS"] },
+                  { k: "Databases", v: ["PostgreSQL", "MySQL", "MongoDB", "SQLite", "Firebase"] },
+                  { k: "Mobile", v: ["Flutter"] },
+                ].map((row) => (
+                  <div key={row.k}>
+                    <div className="text-xs font-semibold text-slate-300">{row.k}</div>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {row.v.map((x) => (
+                        <span
+                          key={x}
+                          className="px-3 py-1 text-xs rounded-full border border-white/10 bg-white/[0.03] text-slate-200"
+                        >
+                          {x}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Education */}
+            <div className="p-6 rounded-2xl surface surface-hover">
+              <div className="text-sm font-semibold text-slate-200">Education</div>
+              <div className="mt-2 h-px w-10 bg-primary-400/70" />
+              <div className="mt-4 space-y-1.5">
+                <div className="text-sm text-slate-100 font-semibold">
+                  B.Tech in Information Technology
+                </div>
+                <div className="text-sm text-slate-300">Atmiya University</div>
+                <div className="text-sm text-slate-300">2021 – 2025</div>
+                <div className="text-sm text-slate-400">CGPA: 8.2</div>
+              </div>
+            </div>
+
+            {/* Interests */}
+            <div className="p-6 rounded-2xl surface surface-hover">
+              <div className="text-sm font-semibold text-slate-200">Interests</div>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {["Learning", "Building products", "Problem solving", "Tech exploration"].map((x) => (
+                  <span
+                    key={x}
+                    className="px-3 py-1 text-xs rounded-full border border-white/10 bg-white/[0.03] text-slate-200"
+                  >
+                    {x}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -170,11 +250,11 @@ const About = () => {
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="relative p-10 bg-gradient-to-br from-primary-500/10 via-accent-500/10 to-primary-500/10 rounded-3xl border border-primary-500/20 overflow-hidden">
+          <div className="relative p-10 rounded-3xl surface overflow-hidden">
             {/* Animated background */}
             <div className="absolute inset-0 bg-grid-pattern opacity-20" />
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary-500/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-accent-500/20 rounded-full blur-3xl" />
+            <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-primary-500/14 rounded-full blur-3xl" />
             
             <div className="relative z-10 text-center">
               <div className="inline-flex items-center space-x-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full mb-6">
@@ -194,7 +274,7 @@ const About = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                   href="#contact"
-                  className="group px-8 py-4 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold text-lg hover:shadow-2xl hover:shadow-primary-500/50 transition-all duration-300 hover:scale-105 flex items-center space-x-2"
+                  className="group px-8 py-4 bg-primary-500 text-slate-950 rounded-full font-semibold text-lg hover:bg-primary-400 hover:shadow-2xl hover:shadow-primary-500/30 transition-all duration-300 hover:scale-[1.01] flex items-center space-x-2"
                 >
                   <span>Let&apos;s Build Something Exceptional</span>
                   <span className="group-hover:translate-x-1 transition-transform">→</span>

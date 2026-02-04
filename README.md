@@ -282,7 +282,7 @@ Contributions, issues, and feature requests are welcome!
 ## 📧 Contact
 
 **Karan Kathur**
-- Email: contact@karankathur.dev
+- Email: contact.karankathur@gmail.com
 - GitHub: [@KaranKathur06](https://github.com/KaranKathur06)
 - LinkedIn: [Karan Kathur](https://linkedin.com/in/karankathur)
 

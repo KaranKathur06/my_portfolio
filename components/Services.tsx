@@ -23,42 +23,42 @@ const Services = () => {
       icon: Layout,
       title: "Web Design",
       description:
-        "Modern, responsive, and user-centric web designs that captivate and convert. From wireframes to high-fidelity mockups.",
+        "Modern, responsive UI design—from layout to polished screens—focused on clarity and usability.",
       features: ["UI/UX Design", "Responsive Layouts", "Prototyping", "Brand Identity"],
     },
     {
       icon: Code2,
       title: "Web Development",
       description:
-        "Full-stack web applications built with cutting-edge technologies. Fast, scalable, and maintainable code.",
+        "Full-stack web applications with clean architecture, maintainable code, and practical performance.",
       features: ["React & Next.js", "Python Backend", "REST APIs", "Database Design"],
     },
     {
       icon: Smartphone,
       title: "Mobile App Development",
       description:
-        "Cross-platform mobile applications that deliver native-like experiences on iOS and Android.",
+        "Cross-platform mobile apps with consistent UX and reliable integrations.",
       features: ["Flutter & React Native", "Native Performance", "App Store Deployment", "Push Notifications"],
     },
     {
       icon: Palette,
       title: "UI/UX Design",
       description:
-        "Intuitive interfaces and delightful user experiences that keep users engaged and satisfied.",
+        "Interface and experience design that makes flows intuitive and easy to use.",
       features: ["User Research", "Wireframing", "Interactive Prototypes", "Usability Testing"],
     },
     {
       icon: Database,
       title: "Backend & APIs",
       description:
-        "Robust backend systems and RESTful APIs using Python frameworks like Django, Flask, and FastAPI.",
+        "Backend systems and REST APIs using Python frameworks (Django, Flask, FastAPI).",
       features: ["Python Frameworks", "Database Optimization", "Authentication", "Cloud Integration"],
     },
     {
       icon: Wrench,
       title: "Maintenance & Support",
       description:
-        "Ongoing maintenance, updates, and technical support to keep your digital products running smoothly.",
+        "Ongoing support for updates, fixes, and improvements—so your product stays stable.",
       features: ["Bug Fixes", "Performance Optimization", "Security Updates", "Feature Enhancements"],
     },
   ];
@@ -69,7 +69,7 @@ const Services = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <div
-            className={`inline-flex items-center space-x-2 px-4 py-2 bg-primary-500/10 border border-primary-500/30 rounded-full mb-6 transition-all duration-700 ${
+            className={`inline-flex items-center space-x-2 px-4 py-2 surface rounded-full mb-6 transition-all duration-700 ${
               inView ? "opacity-100 scale-100" : "opacity-0 scale-90"
             }`}
           >
@@ -94,7 +94,7 @@ const Services = () => {
           </p>
 
           <div
-            className={`w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto mt-6 transition-all duration-700 delay-300 ${
+            className={`w-20 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 mx-auto mt-6 transition-all duration-700 delay-300 ${
               inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
             }`}
           />
@@ -105,13 +105,13 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className={`group p-8 bg-slate-900/50 border border-slate-800 rounded-2xl hover:border-primary-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/10 ${
+              className={`group p-8 rounded-2xl surface surface-hover transition-transform duration-300 hover:scale-[1.01] ${
                 inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
               style={{ transitionDelay: `${index * 100 + 400}ms` }}
             >
               {/* Icon */}
-              <div className="w-16 h-16 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary-500/14 to-primary-500/0 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                 <service.icon className="text-primary-400" size={32} />
               </div>
 
@@ -134,7 +134,7 @@ const Services = () => {
               </ul>
 
               {/* Hover Effect */}
-              <div className="mt-6 pt-6 border-t border-slate-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="mt-6 pt-6 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <a
                   href="#contact"
                   className="text-primary-400 font-semibold flex items-center space-x-2 hover:space-x-3 transition-all"
@@ -158,7 +158,7 @@ const Services = () => {
           </p>
           <a
             href="#contact"
-            className="inline-block px-8 py-4 border-2 border-primary-500 rounded-full font-semibold text-lg hover:bg-primary-500/10 transition-all duration-300 hover:scale-105"
+            className="inline-block px-8 py-4 rounded-full font-semibold text-lg surface surface-hover hover:scale-[1.01] transition-transform"
           >
             Request a Custom Quote
           </a>

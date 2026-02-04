@@ -17,6 +17,7 @@ const Header = () => {
         "#home",
         "#about",
         "#services",
+        "#pricing",
         "#projects",
         "#skills",
         "#experience",
@@ -45,6 +46,7 @@ const Header = () => {
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
     { name: "Services", href: "#services" },
+    { name: "Pricing", href: "#pricing" },
     { name: "Projects", href: "#projects" },
     { name: "Skills", href: "#skills" },
     { name: "Experience", href: "#experience" },
@@ -56,7 +58,7 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-slate-950/85 backdrop-blur-xl border-b border-slate-900 shadow-lg shadow-primary-500/10"
+          ? "bg-black/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-primary-500/10"
           : "bg-transparent"
       }`}
     >
@@ -91,7 +93,7 @@ const Header = () => {
         {/* CTA Button */}
         <a
           href="#contact"
-          className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/40 transition-all duration-300 hover:scale-[1.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+          className="hidden md:block px-6 py-2.5 rounded-full font-semibold bg-primary-500 text-slate-950 hover:bg-primary-400 hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 hover:scale-[1.01] focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
         >
           Let&apos;s Work Together
         </a>
@@ -108,7 +110,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 animate-slide-down">
+        <div className="md:hidden bg-black/95 backdrop-blur-lg border-t border-white/10 animate-slide-down">
           <ul className="flex flex-col space-y-4 py-6 px-6">
             {navLinks.map((link) => (
               <li key={link.name}>
@@ -127,7 +129,7 @@ const Header = () => {
               <a
                 href="#contact"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-center px-6 py-2.5 bg-gradient-to-r from-primary-500 to-accent-500 rounded-full font-semibold hover:shadow-lg hover:shadow-primary-500/40 transition-all duration-300"
+                className="block text-center px-6 py-2.5 rounded-full font-semibold bg-primary-500 text-slate-950 hover:bg-primary-400 hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300"
               >
                 Let&apos;s Work Together
               </a>

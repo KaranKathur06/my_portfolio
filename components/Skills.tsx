@@ -55,7 +55,7 @@ const Skills = () => {
           </p>
 
           <div
-            className={`w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-500 mx-auto mt-6 transition-all duration-700 delay-300 ${
+            className={`w-20 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 mx-auto mt-6 transition-all duration-700 delay-300 ${
               inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
             }`}
           />
@@ -76,7 +76,7 @@ const Skills = () => {
                 style={{ transitionDelay: `${index * 90 + 350}ms` }}
               >
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <div className="w-12 h-12 bg-gradient-to-br from-primary-500/18 to-primary-500/0 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform">
                     <Icon size={22} className="text-primary-400" />
                   </div>
                   <div>

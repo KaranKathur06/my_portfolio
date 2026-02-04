@@ -9,11 +9,11 @@
 
 @layer base {
   * {
-    @apply border-slate-800;
+    @apply border-white/10;
   }
   
   body {
-    @apply bg-slate-950 text-slate-100;
+    @apply bg-black text-slate-100;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -23,7 +23,7 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-accent-400 to-primary-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-200 via-primary-400 to-primary-600;
   }
 
   .glow-text {
@@ -31,7 +31,25 @@
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-primary-500/20;
+    @apply transition-all duration-300 hover:scale-[1.01] hover:shadow-2xl hover:shadow-primary-500/20;
+  }
+
+  .surface {
+    @apply bg-white/[0.03] border border-white/[0.06] backdrop-blur;
+  }
+
+  .surface-hover {
+    @apply transition-all duration-300 hover:border-primary-500/30 hover:shadow-2xl hover:shadow-primary-500/10;
+  }
+
+  .glow-ring {
+    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.16), 0 0 32px rgba(56, 189, 248, 0.12);
+  }
+
+  .cursor-glow {
+    background: radial-gradient(340px circle at var(--cx, 50%) var(--cy, 40%), rgba(56, 189, 248, 0.12) 0%, rgba(56, 189, 248, 0.05) 22%, transparent 52%);
+    filter: blur(60px);
+    opacity: 0.15;
   }
 
   .section-padding {
@@ -49,7 +67,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-slate-900;
+  @apply bg-black;
 }
 
 ::-webkit-scrollbar-thumb {

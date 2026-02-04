@@ -1,8 +1,8 @@
 export const profile = {
   name: "Karan Kathur",
-  headline: "Full-Stack Developer — Python Engineer — Web & Mobile Applications",
+  headline: "Full-Stack Developer - Python Engineer - Web & Mobile Applications",
   location: "India",
-  email: "kathurkaran077@gmail.com",
+  email: "contact.karankathur@gmail.com",
   phone: "+91-63524-54180",
   links: {
     portfolio: "https://karankathur06.github.io/my_portfolio/",
@@ -78,6 +78,9 @@ export const projects: ProjectItem[] = [
       "Implemented link tracking, CPM logic, earnings analytics, and role-based access control.",
     ],
     featured: true,
+    links: {
+      live: "https://www.smartshort.in",
+    },
   },
   {
     name: "Real-Time Analytics Dashboard",
@@ -134,6 +137,9 @@ export const projects: ProjectItem[] = [
       "Designed and developed multiple responsive portfolio and business websites.",
       "Focused on performance optimization, SEO fundamentals, and modern UI/UX practices.",
     ],
+    links: {
+      live: profile.links.portfolio,
+    },
   },
 ];
 

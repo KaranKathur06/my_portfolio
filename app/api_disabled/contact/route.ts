@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     // Email to you (notification)
     const mailToYou = {
       from: process.env.EMAIL_USER,
-      to: 'kathurkaran077@gmail.com',
+      to: 'contact.karankathur@gmail.com',
       subject: `New Contact Form Submission: ${subject}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5;">
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
               <p style="color: #666; margin: 5px 0;"><strong>Karan Kathur</strong></p>
               <p style="color: #666; margin: 5px 0;">Full-Stack Web & App Developer</p>
               <p style="color: #666; margin: 5px 0;">
-                📧 <a href="mailto:kathurkaran077@gmail.com" style="color: #0ea5e9;">kathurkaran077@gmail.com</a>
+                📧 <a href="mailto:contact.karankathur@gmail.com" style="color: #0ea5e9;">contact.karankathur@gmail.com</a>
               </p>
               <p style="color: #666; margin: 5px 0;">
                 📱 <a href="tel:+916352454180" style="color: #0ea5e9;">+91 6352 454 180</a>
