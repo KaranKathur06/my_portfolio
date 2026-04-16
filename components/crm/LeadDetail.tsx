@@ -18,7 +18,6 @@ interface Lead {
 interface LeadDetailProps {
   lead: Lead;
   onUpdate: (updates: { status?: string; notes?: string }) => Promise<void>;
-  adminKey: string;
 }
 
 const statusFlow = [
@@ -28,7 +27,7 @@ const statusFlow = [
   { value: "closed", label: "Closed", color: "bg-slate-500", textColor: "text-slate-400" },
 ];
 
-const LeadDetail = ({ lead, onUpdate, adminKey }: LeadDetailProps) => {
+const LeadDetail = ({ lead, onUpdate }: LeadDetailProps) => {
   const [notes, setNotes] = useState(lead.notes || "");
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);

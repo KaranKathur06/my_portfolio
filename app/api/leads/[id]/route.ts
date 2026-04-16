@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import { getLeadById, updateLead } from '@/lib/db';
-import { validateAdminKey, unauthorizedResponse } from '@/lib/auth';
+import { validateAdminSession, unauthorizedResponse } from '@/lib/auth';
 
 // ── GET /api/leads/:id — Admin: get lead detail ──────────────────
 export async function GET(
@@ -8,7 +8,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    if (!validateAdminKey(request)) {
+    if (!(await validateAdminSession(request))) {
       return unauthorizedResponse();
     }
 
@@ -37,7 +37,7 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    if (!validateAdminKey(request)) {
+    if (!(await validateAdminSession(request))) {
       return unauthorizedResponse();
     }
 

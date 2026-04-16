@@ -20,19 +20,14 @@ export default function LeadDetailPage({ params }: { params: { id: string } }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const adminKey = typeof window !== "undefined"
-    ? new URLSearchParams(window.location.search).get("key") || ""
-    : "";
-
   useEffect(() => {
-    if (!adminKey) return;
     fetchLead();
-  }, [adminKey, params.id]);
+  }, [params.id]);
 
   const fetchLead = async () => {
     try {
       const res = await fetch(`/api/leads/${params.id}`, {
-        headers: { "x-admin-key": adminKey },
+        credentials: "same-origin",
       });
 
       if (!res.ok) {
@@ -59,10 +54,8 @@ export default function LeadDetailPage({ params }: { params: { id: string } }) {
     try {
       const res = await fetch(`/api/leads/${lead.id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "x-admin-key": adminKey,
-        },
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify(updates),
       });
 
@@ -91,7 +84,7 @@ export default function LeadDetailPage({ params }: { params: { id: string } }) {
           <div className="text-4xl mb-4">😕</div>
           <h2 className="text-xl font-semibold text-slate-200 mb-2">{error || "Lead not found"}</h2>
           <a
-            href={`/internal-admin-x9k7/leads?key=${adminKey}`}
+            href="/internal-admin-x9k7/leads"
             className="text-primary-400 hover:text-primary-300 text-sm"
           >
             ← Back to Leads
@@ -105,14 +98,14 @@ export default function LeadDetailPage({ params }: { params: { id: string } }) {
     <div className="space-y-6">
       {/* Back link */}
       <a
-        href={`/internal-admin-x9k7/leads?key=${adminKey}`}
+        href="/internal-admin-x9k7/leads"
         className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-primary-300 transition-colors"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         Back to Leads
       </a>
 
-      <LeadDetail lead={lead} onUpdate={handleUpdate} adminKey={adminKey} />
+      <LeadDetail lead={lead} onUpdate={handleUpdate} />
     </div>
   );
 }

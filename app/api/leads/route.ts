@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 import { createLead, getAllLeads } from '@/lib/db';
-import { validateAdminKey, unauthorizedResponse, checkRateLimit, getClientIP } from '@/lib/auth';
+import { validateAdminSession, unauthorizedResponse, checkRateLimit, getClientIP } from '@/lib/auth';
 
 // ── POST /api/leads — Public: submit a new lead ───────────────────
 export async function POST(request: NextRequest) {
@@ -75,7 +75,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     // Admin-only access
-    if (!validateAdminKey(request)) {
+    if (!(await validateAdminSession(request))) {
       return unauthorizedResponse();
     }
 

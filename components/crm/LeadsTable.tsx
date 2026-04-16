@@ -14,7 +14,6 @@ interface Lead {
 
 interface LeadsTableProps {
   leads: Lead[];
-  adminKey: string;
   compact?: boolean;
 }
 
@@ -37,7 +36,7 @@ const statusConfig: Record<string, { label: string; className: string }> = {
   },
 };
 
-const LeadsTable = ({ leads, adminKey, compact = false }: LeadsTableProps) => {
+const LeadsTable = ({ leads, compact = false }: LeadsTableProps) => {
   if (leads.length === 0) {
     return (
       <div className="p-12 rounded-2xl bg-white/[0.02] border border-white/[0.06] text-center">
@@ -86,7 +85,7 @@ const LeadsTable = ({ leads, adminKey, compact = false }: LeadsTableProps) => {
         return (
           <a
             key={lead.id}
-            href={`/internal-admin-x9k7/leads/${lead.id}?key=${adminKey}`}
+            href={`/internal-admin-x9k7/leads/${lead.id}`}
             className="grid grid-cols-12 gap-4 px-6 py-4 border-b border-white/[0.04] hover:bg-white/[0.03] transition-colors cursor-pointer group"
           >
             {/* Name */}

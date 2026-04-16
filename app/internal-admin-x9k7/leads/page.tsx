@@ -19,14 +19,9 @@ export default function LeadsPage() {
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const adminKey = typeof window !== "undefined"
-    ? new URLSearchParams(window.location.search).get("key") || ""
-    : "";
-
   useEffect(() => {
-    if (!adminKey) return;
     fetchLeads();
-  }, [adminKey, statusFilter]);
+  }, [statusFilter]);
 
   const fetchLeads = async () => {
     try {
@@ -36,7 +31,7 @@ export default function LeadsPage() {
       if (searchQuery) params.set("search", searchQuery);
 
       const res = await fetch(`/api/leads?${params.toString()}`, {
-        headers: { "x-admin-key": adminKey },
+        credentials: "same-origin",
       });
 
       if (!res.ok) throw new Error("Failed to fetch leads");
@@ -121,7 +116,7 @@ export default function LeadsPage() {
           ))}
         </div>
       ) : (
-        <LeadsTable leads={leads} adminKey={adminKey} />
+        <LeadsTable leads={leads} />
       )}
     </div>
   );

@@ -29,19 +29,14 @@ export default function CrmDashboard() {
   const [recentLeads, setRecentLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const adminKey = typeof window !== "undefined"
-    ? new URLSearchParams(window.location.search).get("key") || ""
-    : "";
-
   useEffect(() => {
-    if (!adminKey) return;
     fetchData();
-  }, [adminKey]);
+  }, []);
 
   const fetchData = async () => {
     try {
       const res = await fetch("/api/leads", {
-        headers: { "x-admin-key": adminKey },
+        credentials: "same-origin",
       });
 
       if (!res.ok) throw new Error("Unauthorized");
@@ -101,13 +96,13 @@ export default function CrmDashboard() {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-slate-200">Recent Leads</h2>
           <a
-            href={`/internal-admin-x9k7/leads?key=${adminKey}`}
+            href="/internal-admin-x9k7/leads"
             className="text-sm text-primary-400 hover:text-primary-300 transition-colors"
           >
             View All →
           </a>
         </div>
-        <LeadsTable leads={recentLeads} adminKey={adminKey} compact />
+        <LeadsTable leads={recentLeads} compact />
       </div>
     </div>
   );
