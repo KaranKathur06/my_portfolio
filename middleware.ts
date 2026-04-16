@@ -12,27 +12,17 @@ function getJWTSecret(): Uint8Array {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // ── Protect CRM page routes ──────────────────────────────────────
-  // Allow the auth API through (it handles its own security)
+  // ── Protect admin API routes with session cookie ─────────────────
+  // Auth endpoints handle their own security (login, logout, me)
   if (pathname.startsWith('/api/admin/')) {
     return NextResponse.next();
   }
 
+  // ── CRM pages: let them through ─────────────────────────────────
+  // AuthProvider on the client handles showing the password gate
+  // vs the dashboard based on session status
   if (pathname.startsWith('/internal-admin-x9k7')) {
-    const token = request.cookies.get(COOKIE_NAME)?.value;
-
-    if (!token) {
-      // No session — return 404 to hide route existence
-      return new NextResponse('Not Found', { status: 404 });
-    }
-
-    try {
-      await jwtVerify(token, getJWTSecret());
-      return NextResponse.next();
-    } catch {
-      // Invalid/expired session — return 404
-      return new NextResponse('Not Found', { status: 404 });
-    }
+    return NextResponse.next();
   }
 
   return NextResponse.next();
