@@ -1,12 +1,12 @@
 "use client";
 
 import { useMemo } from "react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Terminal, Server, Database, Shield } from "lucide-react";
 import { profile } from "@/data/portfolio";
 
 const Hero = () => {
   const gifSrc = useMemo(() => {
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/my_portfolio";
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
     return `${basePath}/download.gif`;
   }, []);
 
@@ -33,6 +33,8 @@ const Hero = () => {
         <div className="absolute inset-0 bg-[radial-gradient(900px_circle_at_50%_12%,rgba(56,189,248,0.08),transparent_58%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(760px_circle_at_18%_88%,rgba(56,189,248,0.05),transparent_62%)]" />
         <div className="absolute inset-0 opacity-25 bg-grid-pattern" />
+        {/* Subtle cyan ambient animation */}
+        <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-primary-500/[0.04] rounded-full blur-3xl animate-float" />
       </div>
 
       <div className="container-custom px-6 relative z-10">
@@ -45,23 +47,26 @@ const Hero = () => {
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 animate-slide-up">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-4 animate-slide-up">
               Hi, I&apos;m{" "}
               <span className="text-gradient glow-text">Karan Kathur</span>
             </h1>
 
             {/* Role */}
-            <div className="mb-10">
+            <div className="mb-6">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-200">
                 {profile.headline}
               </h2>
             </div>
 
-            {/* Description */}
+            {/* Positioning Line */}
             <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto lg:mx-0 mb-12 animate-fade-in leading-relaxed">
-              Building powerful, elegant digital experiences with{" "}
-              <span className="text-primary-400 font-semibold">Python</span> at the core.
-              Transforming ideas into production-ready, high-impact digital products.
+              I build backend-driven applications, APIs, and dashboards that are{" "}
+              <span className="text-primary-400 font-semibold">reliable</span>,{" "}
+              <span className="text-primary-400 font-semibold">scalable</span>, and{" "}
+              <span className="text-primary-400 font-semibold">production-ready</span>.
+              Transforming ideas into high-impact digital products with{" "}
+              <span className="text-slate-200 font-semibold">Python</span> at the core.
             </p>
 
             {/* CTA Buttons */}
@@ -86,7 +91,7 @@ const Hero = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10">
               {[
-                { label: "Experience", value: "~1 year" },
+                { label: "Experience", value: "+1 year" },
                 { label: "Freelancing", value: "Since July 2025" },
                 { label: "Location", value: profile.location },
               ].map((item) => (
@@ -102,80 +107,84 @@ const Hero = () => {
 
           </div>
 
+          {/* Terminal Panel — System Snapshot */}
           <div className="hidden lg:block">
             <div className="relative ml-auto max-w-md">
-              <div className="group/scene relative">
-                <div className="pointer-events-none absolute -inset-10 opacity-35 group-hover/scene:opacity-45 transition-opacity duration-500">
-                  <div className="absolute inset-0 blur-2xl">
-                    <svg
-                      viewBox="0 0 600 600"
-                      className="h-full w-full translate-y-0 group-hover/scene:translate-y-1 transition-transform duration-500 brightness-100 group-hover/scene:brightness-110"
-                      aria-hidden="true"
-                    >
-                      <defs>
-                        <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
-                          <stop offset="0%" stopColor="rgba(56,189,248,0.22)" />
-                          <stop offset="55%" stopColor="rgba(56,189,248,0.06)" />
-                          <stop offset="100%" stopColor="rgba(0,0,0,0)" />
-                        </radialGradient>
-                        <linearGradient id="heroStroke" x1="0" y1="0" x2="1" y2="1">
-                          <stop offset="0%" stopColor="rgba(56,189,248,0.45)" />
-                          <stop offset="100%" stopColor="rgba(56,189,248,0.0)" />
-                        </linearGradient>
-                      </defs>
-                      <g className="origin-center animate-[spin_12s_linear_infinite]" opacity="0.9">
-                        <circle cx="300" cy="300" r="210" fill="url(#heroGlow)" />
-                        <circle cx="300" cy="300" r="238" fill="none" stroke="url(#heroStroke)" strokeWidth="2" />
-                        <circle cx="300" cy="300" r="150" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1" />
-                      </g>
-                    </svg>
+              {/* Glow backdrop */}
+              <div className="pointer-events-none absolute -inset-8 opacity-30">
+                <div className="absolute inset-0 bg-primary-500/10 rounded-3xl blur-2xl" />
+              </div>
+
+              <div className="relative space-y-4">
+                {/* Terminal: Code Preview */}
+                <div className="group/panel rounded-2xl border border-white/10 bg-[#0a0e17]/90 backdrop-blur-md shadow-2xl shadow-black/40 p-5 transition-all duration-300 hover:shadow-black/60 hover:border-primary-500/25">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/60" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/60" />
+                      <div className="ml-2 text-xs text-slate-500 font-mono">~/system-status</div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Terminal size={14} className="text-slate-500" />
+                      <span className="inline-flex items-center gap-1 text-[10px] text-slate-400">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        live
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="font-mono text-xs leading-relaxed space-y-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-500">$</span>
+                      <span className="text-primary-300">karan</span>
+                      <span className="text-slate-500">--status</span>
+                    </div>
+                    <div className="text-slate-400 pl-4 border-l border-white/5 space-y-1 mt-2">
+                      <div className="flex items-center gap-2">
+                        <Server size={11} className="text-primary-400" />
+                        <span className="text-emerald-400">✔</span>
+                        <span>Backend Systems ── Python • Django • Node.js + FastAPI</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Database size={11} className="text-primary-400" />
+                        <span className="text-emerald-400">✔</span>
+                        <span>Databases ── PostgreSQL • MongoDB</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Terminal size={11} className="text-primary-400" />
+                        <span className="text-emerald-400">✔</span>
+                        <span>Frontend ── React • Next.js • Tailwind</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Shield size={11} className="text-primary-400" />
+                        <span className="text-emerald-400">✔</span>
+                        <span>APIs ── REST • Auth • Payments</span>
+                      </div>
+                    </div>
+                    <div className="mt-3 pt-2 border-t border-white/5">
+                      <span className="text-slate-500">status:</span>{" "}
+                      <span className="text-emerald-400 font-semibold">ready for production</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="relative space-y-4">
-                  <div className="group/panel rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md shadow-2xl shadow-black/40 p-5 transition-all duration-300 hover:shadow-black/60 hover:border-primary-500/25 hover:scale-[1.02]">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                        <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
-                        <div className="ml-2 text-xs text-slate-500 font-mono">api/main.py</div>
+                {/* System stats */}
+                <div className="rounded-2xl border border-white/10 bg-[#0a0e17]/90 backdrop-blur-md shadow-2xl shadow-black/35 p-5 transition-all duration-300 hover:shadow-black/55 hover:border-primary-500/20">
+                  <div className="text-xs text-slate-500 font-mono mb-3">deployment log</div>
+                  <div className="space-y-2 text-xs font-mono text-slate-300">
+                    {[
+                      { time: "00:01", text: "Dependencies installed", color: "text-slate-400" },
+                      { time: "00:03", text: "Database migrations applied", color: "text-slate-400" },
+                      { time: "00:04", text: "API routes registered", color: "text-slate-400" },
+                      { time: "00:05", text: "Health check: 200 OK", color: "text-emerald-400" },
+                      { time: "00:06", text: "Build complete — ready to serve", color: "text-primary-300" },
+                    ].map((line) => (
+                      <div key={line.time} className="flex items-center gap-3">
+                        <span className="text-slate-600 w-10">{line.time}</span>
+                        <span className={line.color}>{line.text}</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-[10px] px-2 py-0.5 rounded-full border border-primary-500/25 bg-primary-500/10 text-primary-200">
-                          FastAPI
-                        </span>
-                        <span className="inline-flex items-center gap-1 text-[10px] text-slate-400">
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                          live
-                        </span>
-                      </div>
-                    </div>
-
-                    <pre className="font-mono text-xs leading-relaxed text-slate-300 whitespace-pre">
-                      <span className="text-primary-300">from</span> <span className="text-slate-200">fastapi</span> <span className="text-primary-300">import</span> <span className="text-slate-200">FastAPI</span>{"\n\n"}
-                      <span className="text-slate-200">app</span> <span className="text-slate-200">=</span> <span className="text-slate-200">FastAPI()</span>{"\n\n"}
-                      <span className="text-primary-300">@</span><span className="text-slate-200">app.get</span><span className="text-slate-200">(</span><span className="text-primary-200">&quot;/health&quot;</span><span className="text-slate-200">)</span>{"\n"}
-                      <span className="text-primary-300">def</span> <span className="text-slate-200">health</span><span className="text-slate-200">():</span>{"\n"}
-                      <span className="text-slate-200">    return</span> <span className="text-slate-200">{`{`}</span><span className="text-primary-200">&quot;status&quot;</span><span className="text-slate-200">:</span> <span className="text-primary-200">&quot;ok&quot;</span><span className="text-slate-200">{`}`}</span>
-                    </pre>
-                  </div>
-
-                  <div className="rounded-3xl border border-white/10 bg-white/[0.02] backdrop-blur-md shadow-2xl shadow-black/35 p-5 transition-all duration-300 hover:shadow-black/55 hover:border-primary-500/20 hover:scale-[1.01]">
-                    <div className="text-xs text-slate-500 font-mono mb-3">system status</div>
-                    <div className="space-y-2 text-sm text-slate-200">
-                      {[
-                        "✔ API initialized",
-                        "✔ Routes registered",
-                        "✔ Database connected",
-                        "✔ Health check: OK",
-                        "✔ Ready for production traffic",
-                      ].map((line) => (
-                        <div key={line} className="text-slate-200">
-                          {line}
-                        </div>
-                      ))}
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>

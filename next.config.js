@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  basePath: '/my_portfolio',
+  reactStrictMode: true,
+  swcMinify: true,
   images: {
     unoptimized: true,
   },
-  reactStrictMode: true,
-  swcMinify: true,
+  // Server-side rendering enabled (no static export)
+  // Required for API routes, middleware, and database connectivity
 };
 
 module.exports = nextConfig;

@@ -22,7 +22,7 @@ export const experience: ExperienceItem[] = [
   {
     title: "Freelance Full-Stack Developer",
     company: "Self-Employed",
-    dateRange: "July 2025 – Present",
+    dateRange: "January 2025 – Present",
     bullets: [
       "Deliver end-to-end web and mobile applications for clients, from requirement analysis to deployment.",
       "Architect and develop full-stack systems using Python (Django, Flask, FastAPI) and modern frontend frameworks.",

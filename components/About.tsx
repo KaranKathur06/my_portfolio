@@ -26,16 +26,14 @@ const About = () => {
       <div className="container-custom" ref={ref}>
         <div className="text-center mb-16">
           <h2
-            className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-700 ${
-              inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-            }`}
+            className={`text-4xl md:text-5xl font-bold mb-4 transition-all duration-700 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
           >
             About <span className="text-gradient">Me</span>
           </h2>
           <div
-            className={`w-20 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 mx-auto transition-all duration-700 delay-100 ${
-              inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
-            }`}
+            className={`w-20 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 mx-auto transition-all duration-700 delay-100 ${inView ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+              }`}
           />
         </div>
 
@@ -43,9 +41,8 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
           {/* LEFT COLUMN: About Me Text + Workflow */}
           <div
-            className={`space-y-6 transition-all duration-700 delay-200 flex flex-col ${
-              inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-            }`}
+            className={`space-y-6 transition-all duration-700 delay-200 flex flex-col ${inView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+              }`}
           >
             {/* Introduction */}
             <div className="rounded-3xl surface overflow-hidden">
@@ -86,7 +83,7 @@ const About = () => {
 
                   <div className="flex flex-wrap gap-2 pt-1">
                     <span className="px-3 py-1 text-xs rounded-full border border-white/10 bg-white/[0.03] text-slate-200">
-                      Freelancing: July 2025 – Present
+                      Freelancing: January 2025 – Present
                     </span>
                     <a
                       href={`mailto:${profile.email}`}
@@ -142,9 +139,8 @@ const About = () => {
 
           {/* RIGHT COLUMN: Skill/Feature Boxes */}
           <div
-            className={`grid grid-cols-2 gap-4 transition-all duration-700 delay-300 h-full content-start ${
-              inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-            }`}
+            className={`grid grid-cols-2 gap-4 transition-all duration-700 delay-300 h-full content-start ${inView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+              }`}
           >
             {/* Technical Skills */}
             <div className="p-6 rounded-2xl surface surface-hover">
@@ -246,31 +242,30 @@ const About = () => {
 
         {/* Call to Action */}
         <div
-          className={`mt-20 relative transition-all duration-700 delay-500 ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+          className={`mt-20 relative transition-all duration-700 delay-500 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
         >
           <div className="relative p-10 rounded-3xl surface overflow-hidden">
             {/* Animated background */}
             <div className="absolute inset-0 bg-grid-pattern opacity-20" />
             <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary-500/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-primary-500/14 rounded-full blur-3xl" />
-            
+
             <div className="relative z-10 text-center">
               <div className="inline-flex items-center space-x-2 px-4 py-2 bg-green-500/10 border border-green-500/30 rounded-full mb-6">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                 <span className="text-sm font-semibold text-green-400">Available for Hire</span>
               </div>
-              
+
               <h3 className="text-3xl md:text-4xl font-bold mb-4 text-slate-100">
                 Ready to Start Your <span className="text-gradient">Next Project</span>?
               </h3>
-              
+
               <p className="text-lg text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
                 I&apos;m currently open for <span className="text-primary-400 font-semibold">freelance and contract opportunities</span>.
                 Let&apos;s collaborate and create something amazing together!
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                   href="#contact"

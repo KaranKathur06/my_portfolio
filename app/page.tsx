@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -5,12 +8,15 @@ import Services from "@/components/Services";
 import Pricing from "@/components/Pricing";
 import Projects from "@/components/Projects";
 import Skills from "@/components/Skills";
+import HowIWork from "@/components/HowIWork";
 import Experience from "@/components/Experience";
 import Certifications from "@/components/Certifications";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
+  const [selectedService, setSelectedService] = useState<string>("");
+
   return (
     <main className="relative overflow-hidden">
       <div className="fixed inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
@@ -22,12 +28,13 @@ export default function Home() {
         <Hero />
         <About />
         <Services />
-        <Pricing />
+        <Pricing onStartProject={(service) => setSelectedService(service)} />
         <Projects />
         <Skills />
+        <HowIWork />
         <Experience />
         <Certifications />
-        <Contact />
+        <Contact preselectedService={selectedService} />
         <Footer />
       </div>
     </main>
